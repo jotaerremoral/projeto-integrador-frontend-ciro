@@ -34,8 +34,17 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .menu-pai { position: relative; }
 .submenu { display: none; position: absolute; top: 100%; left: 0; min-width: 13rem; background: var(--branco); border: 1px solid var(--linha); box-shadow: 0 .7rem 1.2rem #142b4b20; }
 .menu-pai:hover .submenu, .menu-pai:focus-within .submenu { display: block; }
+.menu > .menu-pai > a, .atalho-selecao { display: flex; align-items: center; gap: .4rem; }
+.icone-submenu, .icone-carrinho { flex: none; }
 .atalho-selecao { white-space: nowrap; padding-inline: 0; }
-.atalho-selecao > span { display: inline-block; min-width: 1.65rem; border-radius: 2rem; background: var(--tinta); color: var(--branco); text-align: center; font-size: .875rem; }
+.selecao-texto {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+}
+#quantidade-nav { display: inline-block; min-width: 1.65rem; border-radius: 2rem; background: var(--tinta); color: var(--branco); text-align: center; font-size: .875rem; }
 .botao.menu-botao { display: none; }
 .hamburguer { display: inline-block; width: 1.125rem; height: .75rem; border-block: .125rem solid; position: relative; }
 .hamburguer::before { content: ""; position: absolute; top: 50%; left: 0; width: 100%; border-top: .125rem solid; transform: translateY(-50%); }
