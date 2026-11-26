@@ -32,7 +32,7 @@
                 </li>
                 <li><a href="#contato">Contato</a></li>
             </ul>
-            <a class="atalho-selecao" href="#catalogo">Ver peças</a>
+            <a class="atalho-selecao" href="#selecao">Seleção <span id="quantidade-nav">0</span></a>
         </nav>
     </header>
 
@@ -61,11 +61,32 @@
             <div class="limite espaco-secao">
                 <div class="titulo-secao">
                     <h2 id="titulo-catalogo">Catálogo</h2>
-                    <p>Conheça as peças da Tornado Store.</p>
+                    <p>Escolha uma categoria ou busque pelo nome.</p>
                 </div>
-                <p class="resultado" id="resultado" aria-live="polite"></p>
-                <noscript>Ative o JavaScript para visualizar o catálogo.</noscript>
-                <ul id="produtos" class="grade" aria-label="Peças do catálogo"></ul>
+                <div class="vitrine">
+                    <div>
+                        <div class="filtros">
+                            <div><label for="busca">Buscar peça</label><input type="search" id="busca" placeholder="Ex.: camiseta"></div>
+                            <div><label for="categoria">Categoria</label>
+                                <select id="categoria">
+                                    <option value="todas">Todas</option>
+                                    <option value="camisetas">Camisetas</option>
+                                    <option value="calcas">Calças e bermudas</option>
+                                    <option value="infantil">Infantil</option>
+                                </select>
+                            </div>
+                        </div>
+                        <p class="resultado" id="resultado" aria-live="polite"></p>
+                        <ul id="produtos" class="grade" aria-label="Peças do catálogo"></ul>
+                        <noscript>Ative o JavaScript para navegar pelo catálogo interativo.</noscript>
+                    </div>
+                    <aside id="selecao" class="selecao" aria-labelledby="titulo-selecao">
+                        <h3 id="titulo-selecao" tabindex="-1">Sua seleção</h3>
+                        <p id="resumo" aria-live="polite">0 peças · Total R$ 0,00</p>
+                        <ul id="lista-selecao" aria-label="Peças selecionadas"></ul>
+                        <button id="limpar" type="button" class="botao botao-contorno" disabled>Limpar seleção</button>
+                    </aside>
+                </div>
             </div>
         </section>
 
@@ -104,7 +125,7 @@
             <div class="limite espaco-secao contato">
                 <div class="titulo-secao">
                     <h2 id="titulo-contato">Fale com a loja</h2>
-                    <p>Campos de contato, com exemplo de validação de preenchimento pelo HTML.</p>
+                    <p>Use dados fictícios para testar. O formulário valida e exibe o resultado nesta página.</p>
                 </div>
                 <form id="form-contato">
                     <fieldset>
@@ -121,7 +142,7 @@
                             </div>
                             <div class="campo-largo"><label for="mensagem">Mensagem *</label><textarea id="mensagem" name="mensagem" rows="4" required maxlength="500"></textarea></div>
                         </div>
-                        <p>Formulário de demonstração. A interação será adicionada na etapa de eventos.</p>
+                        <button type="submit" class="botao botao-principal">Simular envio</button>
                         <p id="retorno-contato" role="status"></p>
                     </fieldset>
                 </form>
@@ -135,7 +156,6 @@
             <a href="#inicio">Voltar ao início ↑</a>
         </div>
     </footer>
-    <script src="js/menu.js" defer></script>
     <script src="js/script.js" defer></script>
 </body>
 </html>

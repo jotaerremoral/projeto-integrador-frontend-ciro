@@ -13,6 +13,12 @@ const produtos = [
     { id: 6, nome: "Bermuda infantil", categoria: "infantil", preco: 5990, imagem: "bermuda-infantil.svg", descricao: "Bermuda infantil azul marinho com cordão claro" }
 ];
 
+const listaProdutos = document.querySelector("#produtos");
+const listaSelecao = document.querySelector("#lista-selecao");
+const busca = document.querySelector("#busca");
+const categoria = document.querySelector("#categoria");
+const botaoLimpar = document.querySelector("#limpar");
+const selecionados = new Set();
 const moeda = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
 
 function nomeCategoria(codigo) {
@@ -22,6 +28,19 @@ function nomeCategoria(codigo) {
         case "infantil": return "Infantil";
         default: return "Outras peças";
     }
+}
+
+function normalizar(texto) {
+    return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+}
+
+function filtrarProdutos() {
+    const termo = normalizar(busca.value);
+    return produtos.filter((produto) => {
+        const corresponde = normalizar(produto.nome).includes(termo);
+        const pertence = categoria.value === "todas" || categoria.value === produto.categoria;
+        return corresponde && pertence;
+    });
 }
 
 function criarElemento(tag, classe, texto) {
@@ -42,21 +61,138 @@ function criarCard(produto) {
     foto.append(imagem);
 
     const dados = criarElemento("div", "produto-dados");
+    const botao = criarElemento("button", "botao botao-contorno", "Selecionar");
+    botao.type = "button";
+    botao.dataset.produto = produto.id;
+    botao.setAttribute("aria-label", "Selecionar " + produto.nome);
+    botao.setAttribute("aria-pressed", String(selecionados.has(produto.id)));
     dados.append(
         criarElemento("span", "categoria", nomeCategoria(produto.categoria)),
         criarElemento("h3", "", produto.nome),
-        criarElemento("p", "preco", moeda.format(produto.preco / 100))
+        criarElemento("p", "preco", moeda.format(produto.preco / 100)),
+        botao
     );
     card.append(foto, dados);
     return card;
 }
 
-function mostrarProdutos(categoria = "todas") {
-    const visiveis = produtos.filter((produto) => categoria === "todas" || produto.categoria === categoria);
-    const total = visiveis.reduce((soma, produto) => soma + produto.preco, 0);
-    document.querySelector("#produtos").replaceChildren(...visiveis.map(criarCard));
-    document.querySelector("#resultado").textContent =
-        visiveis.length + " peças · Valor do catálogo: " + moeda.format(total / 100);
+function mostrarProdutos() {
+    const visiveis = filtrarProdutos();
+    listaProdutos.replaceChildren(...visiveis.map(criarCard));
+    const contagem = document.querySelector("#resultado");
+
+    if (visiveis.length === 0) {
+        contagem.textContent = "Nenhuma peça encontrada. Tente outra busca ou categoria.";
+    } else if (visiveis.length === 1) {
+        contagem.textContent = "1 peça encontrada";
+    } else {
+        contagem.textContent = visiveis.length + " peças encontradas";
+    }
 }
 
+function atualizarSelecao() {
+    const itens = produtos.filter((produto) => selecionados.has(produto.id));
+    const total = itens.reduce((soma, produto) => soma + produto.preco, 0);
+    document.querySelector("#resumo").textContent =
+        itens.length + (itens.length === 1 ? " peça" : " peças") + " · Total " + moeda.format(total / 100);
+    document.querySelector("#quantidade-nav").textContent = itens.length;
+    botaoLimpar.disabled = itens.length === 0;
+
+    // Limpa as linhas da seleção anterior antes de exibir as atuais.
+    while (listaSelecao.firstChild) listaSelecao.firstChild.remove();
+    const linhas = document.createDocumentFragment();
+    for (const produto of itens) {
+        linhas.append(criarElemento("li", "", produto.nome + " · " + moeda.format(produto.preco / 100)));
+    }
+
+    listaSelecao.append(linhas);
+
+    for (const botao of listaProdutos.querySelectorAll("button[data-produto]")) {
+        botao.setAttribute("aria-pressed", String(selecionados.has(Number(botao.dataset.produto))));
+    }
+}
+
+// Um listener no contêiner atende também os novos cards renderizados pelos filtros.
+listaProdutos.addEventListener("click", (evento) => {
+    const botao = evento.target.closest("button[data-produto]");
+    if (!botao) return;
+
+    const id = Number(botao.dataset.produto);
+    if (selecionados.has(id)) {
+        selecionados.delete(id);
+    } else {
+        selecionados.add(id);
+    }
+    atualizarSelecao();
+});
+
+busca.addEventListener("input", mostrarProdutos);
+categoria.addEventListener("change", mostrarProdutos);
+botaoLimpar.addEventListener("click", () => {
+    selecionados.clear();
+    document.querySelector("#titulo-selecao").focus();
+    atualizarSelecao();
+});
+
+const menu = document.querySelector("#menu");
+const botaoMenu = document.querySelector("#menu-botao");
+
+function abrirMenu(aberto) {
+    menu.classList.toggle("aberto", aberto);
+    botaoMenu.setAttribute("aria-expanded", String(aberto));
+}
+
+botaoMenu.addEventListener("click", () => abrirMenu(!menu.classList.contains("aberto")));
+document.addEventListener("keydown", (evento) => {
+    if (evento.key === "Escape" && menu.classList.contains("aberto")) {
+        abrirMenu(false);
+        botaoMenu.focus();
+    }
+});
+
+function marcarPagina() {
+    const secaoAtual = window.location.hash || "#inicio";
+    for (const link of menu.querySelectorAll(":scope > li > a")) {
+        const ativo = link.getAttribute("href") === secaoAtual;
+        link.classList.toggle("ativo", ativo);
+        if (ativo) {
+            link.setAttribute("aria-current", "location");
+        } else {
+            link.removeAttribute("aria-current");
+        }
+    }
+}
+
+menu.addEventListener("click", (evento) => {
+    const link = evento.target.closest("a");
+    if (!link) return;
+
+    if (link.dataset.categoria) {
+        busca.value = "";
+        categoria.value = link.dataset.categoria;
+        mostrarProdutos();
+    }
+    abrirMenu(false);
+});
+window.addEventListener("hashchange", marcarPagina);
+
+document.querySelector("#form-contato").addEventListener("submit", (evento) => {
+    evento.preventDefault();
+    const formulario = evento.currentTarget;
+    const nome = formulario.elements.nome.value.trim();
+    const mensagem = formulario.elements.mensagem.value.trim();
+    const retorno = document.querySelector("#retorno-contato");
+
+    if (!nome || !mensagem) {
+        retorno.textContent = "Preencha o nome e a mensagem antes de continuar.";
+        formulario.elements[nome ? "mensagem" : "nome"].focus();
+        return;
+    }
+
+    retorno.textContent = "Obrigado, " + nome + "! O formulário foi validado. Nenhuma mensagem foi enviada.";
+    formulario.reset();
+});
+
+marcarPagina();
 mostrarProdutos();
+atualizarSelecao();
