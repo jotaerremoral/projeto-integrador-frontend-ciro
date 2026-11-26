@@ -12,10 +12,28 @@
 <body>
     <a class="pular" href="#conteudo">Ir para o conteúdo</a>
     <header class="cabecalho">
-        <div class="limite barra">
+        <nav class="limite barra" aria-label="Navegação principal">
+            <a class="marca" href="#inicio" aria-label="Tornado Store, início">
                 <img src="assets/images/logo-tornado-store.png" width="120" height="80"
                     alt="Logo Tornado Store com um furacão prateado">
-        </div>
+            </a>
+            <button type="button" class="botao menu-botao" id="menu-botao" aria-controls="menu" aria-expanded="false">
+                <span class="hamburguer" aria-hidden="true"></span> Menu
+            </button>
+            <ul id="menu" class="menu">
+                <li><a class="ativo" href="#inicio" aria-current="location">Início</a></li>
+                <li class="menu-pai">
+                    <a href="#catalogo">Catálogo <span aria-hidden="true">⌄</span></a>
+                    <ul class="submenu" aria-label="Categorias do catálogo">
+                        <li><a href="#camisetas">Camisetas</a></li>
+                        <li><a href="#calcas">Calças e bermudas</a></li>
+                        <li><a href="#infantil">Infantil</a></li>
+                    </ul>
+                </li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+            <a class="atalho-selecao" href="#catalogo">Ver peças</a>
+        </nav>
     </header>
 
     <main id="conteudo">
@@ -164,5 +182,6 @@
             <a href="#inicio">Voltar ao início ↑</a>
         </div>
     </footer>
+    <script src="js/menu.js" defer></script>
 </body>
 </html>
