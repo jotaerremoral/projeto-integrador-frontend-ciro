@@ -68,4 +68,5 @@ HTML5, CSS3 e JavaScript puro. As ilustrações são SVG e a vinheta usa WebM e 
 
 - Nome: Ciro Junior
 - RGM: preencher na revisão final
-- Curso: preencher na revisão final
+- Curso: Análise e Desenvolvimento de Sistemas (ADS)
+- Professor: Jeofton
