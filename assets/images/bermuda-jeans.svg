@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 260">
+  <defs>
+    <linearGradient id="tecido" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop stop-color="#669ac6"/><stop offset=".55" stop-color="#2d5286"/><stop offset="1" stop-color="#669ac6"/>
+    </linearGradient>
+    <radialGradient id="sombra"><stop stop-color="#142846" stop-opacity=".32"/><stop offset="1" stop-color="#142846" stop-opacity="0"/></radialGradient>
+  </defs>
+  <ellipse cx="161" cy="225" rx="121" ry="22" fill="url(#sombra)"/>
+
+  <path fill="url(#tecido)" stroke="#274670" stroke-width="2" stroke-linejoin="round"
+    d="M100 36Q160 43 220 36L238 190 174 194 160 107 146 194 82 190Z"/>
+  <path d="M100 51Q160 57 221 51M124 54Q123 78 99 84M196 54Q197 78 221 84M160 55v45m-9-45v27q0 8 9 8" fill="none" stroke="#b09969" stroke-width="2" stroke-opacity=".66"/>
+  <circle cx="160" cy="48" r="2.5" fill="#b09969"/>
+  <path d="m89 176 59 4m24 0 63-4M100 93l-8 76m129-76 12 76" stroke="#d2b16d" stroke-opacity=".6" fill="none"/>
+</svg>
