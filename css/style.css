@@ -27,6 +27,18 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .cabecalho { z-index: 5; position: sticky; top: 0; background: var(--branco); border-bottom: 1px solid var(--linha); }
 .barra { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
 .marca img { width: 6.75rem; }
+.menu, .submenu { list-style: none; margin: 0; padding: 0; }
+.menu { display: flex; align-items: center; gap: .35rem; }
+.menu li > a, .atalho-selecao { display: block; text-decoration: none; color: var(--tinta); padding: .65rem .85rem; font-weight: bold; }
+.menu a:hover, .menu .ativo { color: #0649ae; background: #e8f1ff; }
+.menu-pai { position: relative; }
+.submenu { display: none; position: absolute; top: 100%; left: 0; min-width: 13rem; background: var(--branco); border: 1px solid var(--linha); box-shadow: 0 .7rem 1.2rem #142b4b20; }
+.menu-pai:hover .submenu, .menu-pai:focus-within .submenu { display: block; }
+.atalho-selecao { white-space: nowrap; padding-inline: 0; }
+.atalho-selecao > span { display: inline-block; min-width: 1.65rem; border-radius: 2rem; background: var(--tinta); color: var(--branco); text-align: center; font-size: .875rem; }
+.botao.menu-botao { display: none; }
+.hamburguer { display: inline-block; width: 1.125rem; height: .75rem; border-block: .125rem solid; position: relative; }
+.hamburguer::before { content: ""; position: absolute; top: 50%; left: 0; width: 100%; border-top: .125rem solid; transform: translateY(-50%); }
 
 .hero { display: grid; grid-template-columns: 1fr 1.16fr; align-items: stretch; padding-block: var(--espaco); min-height: 29rem; }
 .hero-texto { padding: clamp(1.5rem, 4vw, 3.5rem) clamp(1.25rem, 4vw, 3.75rem); background: var(--tinta); color: var(--branco); }
@@ -105,6 +117,10 @@ textarea { resize: vertical; }
     .hero-texto { padding-block: 1.75rem; }
     .hero-visual img { width: min(64%, 18rem); }
     .selecao { grid-row: 2; }
+    .botao.menu-botao { display: inline-flex; background: var(--papel); color: var(--tinta); border-color: var(--linha); }
+    .menu { display: none; flex-direction: column; align-items: stretch; position: absolute; top: 100%; left: 0; right: 0; padding: .55rem var(--espaco); background: var(--branco); border-bottom: 1px solid var(--linha); box-shadow: 0 .7rem 1.2rem #142b4b20; }
+    .menu.aberto { display: flex; }
+    .menu .submenu { display: block; position: static; min-width: 0; padding-left: 1.1rem; box-shadow: none; border: 0; }
     .marca img { width: 5.625rem; }
 }
 @media (max-width: 25rem) {
