@@ -32,6 +32,7 @@ menu.addEventListener("click", (evento) => {
     const link = evento.target.closest("a");
     if (!link) return;
 
+    if (link.dataset.categoria) mostrarProdutos(link.dataset.categoria);
     abrirMenu(false);
 });
 window.addEventListener("hashchange", marcarPagina);
