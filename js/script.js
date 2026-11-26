@@ -24,26 +24,33 @@ function nomeCategoria(codigo) {
     }
 }
 
-let total = 0;
-for (const produto of produtos) {
-    total += +produto.preco;
+function processarCatalogo(lista) {
+    let total = 0;
+    for (const produto of lista) {
+        total += Number(produto.preco);
+    }
+
+    const categorias = new Set();
+    let indice = 0;
+    while (indice < lista.length) {
+        categorias.add(nomeCategoria(lista[indice].categoria));
+        indice++;
+    }
+
+    return { total, categorias: categorias.size, quantidade: lista.length };
 }
 
-const categorias = new Set();
-let indice = 0;
-while (indice < produtos.length) {
-    categorias.add(nomeCategoria(produtos[indice].categoria));
-    indice++;
+function formatarResumo(dados) {
+    let resumo;
+    if (dados.quantidade === 0) {
+        resumo = "Nenhuma peça encontrada";
+    } else if (dados.quantidade === 1) {
+        resumo = "1 peça encontrada";
+    } else {
+        resumo = dados.quantidade + " peças em " + dados.categorias + " categorias";
+    }
+    return resumo + " · Valor do catálogo: " + moeda.format(dados.total / 100);
 }
 
-let resumo;
-if (produtos.length === 0) {
-    resumo = "Nenhuma peça encontrada";
-} else if (produtos.length === 1) {
-    resumo = "1 peça encontrada";
-} else {
-    resumo = produtos.length + " peças em " + categorias.size + " categorias";
-}
-
-document.querySelector("#resultado").textContent =
-    resumo + " · Valor do catálogo: " + moeda.format(total / 100);
+const dadosCatalogo = processarCatalogo(produtos);
+document.querySelector("#resultado").textContent = formatarResumo(dadosCatalogo);
