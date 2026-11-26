@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 260">
+  <defs>
+    <linearGradient id="tecido" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop stop-color="#1969db"/><stop offset=".55" stop-color="#0b3479"/><stop offset="1" stop-color="#1969db"/>
+    </linearGradient>
+    <radialGradient id="sombra"><stop stop-color="#142846" stop-opacity=".32"/><stop offset="1" stop-color="#142846" stop-opacity="0"/></radialGradient>
+  </defs>
+  <ellipse cx="161" cy="225" rx="121" ry="22" fill="url(#sombra)"/>
+
+  <path fill="url(#tecido)" stroke="#092b5e" stroke-width="2" stroke-linejoin="round"
+    d="M122 33 94 40 42 77 68 126 98 110 96 219Q158 225 224 219L222 110 252 126 278 77 226 40 198 33Q162 60 122 33Z"/>
+  <path d="M119 34Q160 72 201 34M99 59 99 109M221 59 221 109M48 83 72 119M272 83 248 119M98 212Q162 218 222 212" fill="none" stroke="#9bc7fd" stroke-opacity=".48" stroke-width="2"/>
+  <path d="M106 123v68m107-74 1 77m-60-131v137" stroke="#fff" stroke-opacity=".13" stroke-width="2" stroke-linecap="round"/>
+  <path d="M101 126Q148 94 219 102M98 144Q151 110 221 119M99 160Q155 125 221 138" fill="none" stroke="#85baff" stroke-width="3"/><path d="M174 76q15-6 27 1t-10 8q-10-1-5-3l14-3-21 13" fill="none" stroke="#e4f4ff" stroke-width="2.4" stroke-linecap="round"/>
+</svg>
