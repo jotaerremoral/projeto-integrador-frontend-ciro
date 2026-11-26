@@ -1,35 +1,104 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tornado Store</title>
 </head>
+
 <body>
-    <h1>Tornado Store</h1>
-    <p>A Tornado Store é uma loja de roupas masculinas para adultos e crianças.</p>
-    <ul>
-        <li>camisetas masculinas</li>
-        <li>calças e bermudas</li>
-        <li>roupas infantis</li>
-    </ul>
-        <table>
-          <tr>
-            <th>Produto</th>
-            <th>Preço</th>
-          </tr>
-          <tr>
-            <td>Camiseta básica</td>
-            <td>R$ 49,90</td>
-          </tr>
-          <tr>
-            <td>Bermuda jeans</td>
-            <td>R$ 99,90</td>
-          </tr>
-        </table>
-        <a href="https://www.cea.com.br/" target="_blank" rel="noopener noreferrer">Visitar loja de referência de moda</a>
-        <img src="assets/images/logo-tornado-store.png"
-     alt="Logo da Tornado Store com um furacão em estilo cartoon e texto 3D"
-     width="300">
+
+    <header>
+        <h1>Tornado Store</h1>
+    </header>
+
+    <main>
+
+        <section>
+            <h2>Produtos em destaque</h2>
+
+            <p>A Tornado Store é uma loja de roupas masculinas para adultos e crianças.</p>
+
+            <ul>
+                <li>camisetas masculinas</li>
+                <li>calças e bermudas</li>
+                <li>roupas infantis</li>
+            </ul>
+
+            <table>
+                <tr>
+                    <th>Produto</th>
+                    <th>Preço</th>
+                </tr>
+                <tr>
+                    <td>Camiseta básica</td>
+                    <td>R$ 49,90</td>
+                </tr>
+                <tr>
+                    <td>Bermuda jeans</td>
+                    <td>R$ 99,90</td>
+                </tr>
+            </table>
+
+            <a href="https://www.cea.com.br/" target="_blank" rel="noopener noreferrer">
+                Visitar loja de referência de moda
+            </a>
+
+            <img src="assets/images/logo-tornado-store.png"
+                alt="Logo da Tornado Store com um furacão em estilo cartoon e texto 3D" width="300">
+        </section>
+
+        <section>
+            <h2>Fale Conosco</h2>
+            <button type="button" aria-label="Fechar aviso">&times;</button>
+            
+            <form>
+                <fieldset>
+                    <legend>Dados para contato</legend>
+
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" name="nome" required>
+
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="telefone">Telefone:</label>
+                    <input type="tel" id="telefone" name="telefone">
+
+                    <label for="pedido">Número do Pedido:</label>
+                    <input type="number" id="pedido" name="pedido" min="1">
+
+                    <label for="assunto">Assunto:</label>
+                    <select id="assunto" name="assunto">
+                        <option value="pedido">Pedido</option>
+                        <option value="troca">Troca</option>
+                        <option value="produto">Produto</option>
+                        <option value="outro">Outro</option>
+                    </select>
+
+                    <p>Como prefere ser contatado?</p>
+
+                    <input type="radio" id="whatsapp" name="contato" value="whatsapp">
+                    <label for="whatsapp">WhatsApp</label>
+
+                    <input type="radio" id="email-contato" name="contato" value="email">
+                    <label for="email-contato">E-mail</label>
+
+                    <label for="mensagem">Mensagem:</label>
+                    <textarea id="mensagem" name="mensagem"></textarea>
+
+                    <button type="submit">Enviar</button>
+                </fieldset>
+            </form>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2019 Tornado Store. Todos os direitos reservados.</p>
+    </footer>
+
 </body>
+
 </html>
